@@ -1,0 +1,119 @@
+.allBooksContainer {
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  background-color: rgb(17, 24, 39);
+}
+
+.cardFooter,
+.bookDetails .divMainImage {
+  display: flex;
+  align-items: center;
+}
+
+.cardFooter {
+  justify-content: space-around;
+  border-top: none;
+}
+
+.binBook:hover {
+  cursor: pointer;
+}
+
+.formBook input {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.formBook ::placeholder,
+.formBook :focus,
+.form-control::file-selector-button,
+.formBook input {
+  color: white;
+}
+
+.formBook :focus {
+  outline: 1px solid #4cecf5;
+  border: 1px solid #4cecf5;
+  background-color: #272839;
+  border: none;
+}
+
+.form-control::file-selector-button {
+  background-color: #323343 !important;
+}
+
+.bookDetails {
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+
+.bookDetails .divMainImage .mainImage {
+    width: 400px;
+    height: 651px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.bookDetails .midCol {
+    border-right: 2px solid white;
+}
+
+.category {
+    width: fit-content;
+    padding: 0.4rem;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 0);
+    color: black;
+}
+
+.descriptionTitle {
+    line-height: 2rem;
+}
+
+.description {
+    line-height: 1.5rem;
+}
+
+.titleBook, .author, .subTitle, .descriptionTitle {
+    font-family: 'Source Serif Pro', serif;
+}
+
+.publisher, .category, .description, .otherInfo {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.modalAddImage {
+    background-color: rgb(17, 24, 39);
+    outline: 1px solid white;
+}
+
+.imgDetail {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.binRemoveImg:hover {
+  cursor: pointer;
+}
+
+.heightRowDeleteImage {
+  min-height: 210px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 810px){
+    .mainImage {
+        width: 250px !important;
+        height: 407px !important;
+    }
+}
+

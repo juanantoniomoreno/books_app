@@ -1,0 +1,46 @@
+
+.textDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.imgHome {
+    border-radius: 15px;
+    width: 100%;
+}
+
+.homeSecPar, .wellcome, .enterButton {
+    font-size: 2rem;
+}
+
+.wellcome {
+    background-color:rgba(0, 0, 0, 0.141);
+    font-weight: bold;
+    width: fit-content;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 2rem;
+}
+
+.divHomeEnter {
+    display: flex;
+    justify-content: center;
+}
+
+.enterButton {
+    background-color: #272839;
+    border: 2px solid white;
+    color: white;
+    margin-top: 2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 428px){
+    .textDiv {
+        margin-bottom: 2rem;
+    }
+}
