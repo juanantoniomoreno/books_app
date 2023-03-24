@@ -26,7 +26,7 @@ class BookController extends AbstractController
         // TODO: Operaciones sobre DB en el Repository.
         $books = [];
         
-        foreach ($bookRepository->findAll() as $book) {
+        foreach ($bookRepository->findAllNotDeleted() as $book) {
             $books[] = $book->toArray();
         }
 

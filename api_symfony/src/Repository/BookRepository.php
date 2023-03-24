@@ -47,6 +47,23 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[]
      */
+
+     public function findAllNotDeleted(): ?array 
+     {
+        $query = $this -> getEntityManager() -> createQuery(
+            'SELECT book
+            FROM App\Entity\Book book
+            WHERE book.book_is_deleted = 0
+            ORDER BY book.published ASC'
+        );
+
+        $books = $query -> getResult();
+        return $books;
+     }
+
+    /**
+     * @return Book[]
+     */
     public function findAllBeforeYear(string $year): ?array
     {
         $query = $this->getEntityManager()->createQuery(

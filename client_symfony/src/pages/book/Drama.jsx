@@ -11,7 +11,7 @@ export const Drama = () => {
   useEffect(() =>{
 
     axios
-      .get(`http://localhost:8000/ws/books-drama`)
+      .get(`http://localhost:8000/ws/books-by-category/drama`)
       .then((response) => {
         //console.log(response.data);
         setDramaBooks( response.data.booksCategory );
