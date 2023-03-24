@@ -5,6 +5,10 @@ namespace App\Repository;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRsegistry;
+
+use App\DQL\DateTimeFunction;
+
 
 /**
  * @extends ServiceEntityRepository<Book>
@@ -29,6 +33,7 @@ class BookRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
 
     public function remove(Book $entity, bool $flush = false): void
     {
@@ -38,6 +43,59 @@ class BookRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * @return Book[]
+     */
+    public function findAllBeforeYear(string $year): ?array
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT book
+            FROM App\Entity\Book book
+            WHERE YEAR(book.published) < :year
+            ORDER BY book.published ASC'
+        )->setParameter('year', $year);
+
+        $books = $query->getArrayResult();
+
+        return $books;
+    }
+
+    /**
+     * @return Book[]
+     */
+    public function findAllCategory( string $category ): ?array
+    {
+
+        $query = $this -> getEntityManager() -> createQuery(
+
+            "SELECT book
+            FROM App\Entity\Book book
+            WHERE book.book_is_deleted = 0
+            AND book.category = :category"
+        ) -> setParameter('category', $category);
+
+        $booksCategory = $query -> getArrayResult();
+
+        return $booksCategory;
+    }
+
+    /**
+     * @return Book
+     */
+    public function findOneBook( int $id): ?Book
+    {
+        $query = $this -> getEntityManager() -> createQuery(
+            "SELECT book
+            FROM App\Entity\Book book
+            WHERE book.id = :id"
+        ) -> setParameter('id', $id);
+
+        $book = $query -> getOneOrNullResult();
+        return $book;
+    }
+
+    
 
 //    /**
 //     * @return Book[] Returns an array of Book objects

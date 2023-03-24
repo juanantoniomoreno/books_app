@@ -11,7 +11,7 @@ class Image
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $image_id = null;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     private ?string $title = null;
@@ -21,11 +21,11 @@ class Image
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Book $book_id = null;
+    private ?Book $book = null;
 
-    public function getImageId(): ?int
+    public function getId(): ?int
     {
-        return $this->image_id;
+        return $this->id;
     }
 
     public function getTitle(): ?string
@@ -52,15 +52,24 @@ class Image
         return $this;
     }
 
-    public function getBookId(): ?Book
+    public function getBook(): ?Book
     {
-        return $this->book_id;
+        return $this->book;
     }
 
-    public function setBookId(?Book $book_id): self
+    public function setBook(?Book $book)
     {
-        $this->book_id = $book_id;
+        $this->book = $book;
+    }
 
-        return $this;
+    // TODO toArray()
+    public function toArray():array
+    {
+        // TODO: Completar los atributos.
+        return [
+            'id'        => $this -> getId(),
+            'title'     => $this -> getTitle(),
+            'image_is_deleted' => $this -> isImageIsDeleted()
+        ];
     }
 }

@@ -15,9 +15,9 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private ?int $book_id = null;
+    private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique: true)]
     private ?string $isbn = null;
 
     #[ORM\Column(length: 150)]
@@ -51,11 +51,11 @@ class Book
     private ?bool $book_is_deleted = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $main_image = null;
+    private ?string $main_image = 'main.jpg';
         
-    public function getBookId(): ?int
+    public function getId(): ?int
     {
-        return $this->book_id;
+        return $this->id;
     }
 
     public function getIsbn(): ?string
@@ -202,4 +202,84 @@ class Book
         return $this;
     }
     
+    public function toArray():array
+    {
+        // TODO: Completar los atributos.
+        return [
+            'id'        => $this -> getId(),
+            'isbn'      => $this -> getIsbn(),
+            'title'     => $this -> getTitle(),
+            'subtitle'  => $this -> getSubtitle(),
+            'author'    => $this -> getAuthor(), 
+            'published' => $this -> getPublished(),
+            'publisher' => $this -> getPublisher(),
+            'pages'     => $this -> getPages(),
+            'description' => $this -> getDescription(),
+            'website'   => $this -> getWebsite(),
+            'category'  => $this -> getCategory(),
+            'main_image'=> $this -> getMainImage()
+        ];
+    }
+
+    public function fromJson(string $json) {
+        $bookArr = json_decode($json, true);
+        if (!$bookArr) {
+            throw new \Exception('can-not-decode-json');
+        }
+
+        $this->fromArray($bookArr);
+    }
+
+    public function fromArray(array $book){
+        // Habrán atributos obligatorios y otros que no, por lo que:
+        if (!array_key_exists('isbn', $book)) {
+            throw new \Exception('can-not-find-isbn-attribute');
+        }
+        $this->setIsbn($book['isbn']);
+
+        if(!array_key_exists('website', $book)){
+            throw new  \Exception('field-website-required');
+        }
+        $this->setWebsite($book['website']);
+
+        if(!array_key_exists('title', $book)){
+            throw new \Exception('field-title-is-required');
+        }
+        $this -> setTitle($book['title']);
+
+        if(!array_key_exists('subtitle', $book)){
+            throw new \Exception('field-subtitle-is-required');
+        }
+        $this -> setSubtitle($book['subtitle']);
+
+        if(!array_key_exists('author', $book)){
+            throw new \Exception('field-author-is-required');
+        }
+        $this -> setAuthor($book['author']);
+
+        if(!array_key_exists('published', $book)){
+            throw new \Exception('field-published-is-required');
+        }
+        $this -> setPublished($book['published']);
+
+        if(!array_key_exists('publisher', $book)){
+            throw new \Exception('field-publisher-is-required');
+        }
+        $this -> setPublisher($book['publisher']);
+
+        if(!array_key_exists('description', $book)){
+            throw new \Exception('field-description-is-required');
+        }
+        $this -> setPublished($book['description']);
+
+        if(!array_key_exists('category', $book) ){
+            throw new \Exception('field-category-required');
+        }
+        $this -> setCategory($book['category']);
+
+        if(!array_key_exists('main_image', $book)){
+            throw new \Exception('main_image-required');
+        }
+        $this -> setMainImage($book['main_image']);
+    }
 }

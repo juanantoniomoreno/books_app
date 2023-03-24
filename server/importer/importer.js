@@ -26,7 +26,7 @@ const convertToDateTime = ( value ) => {
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'password',
     database: 'books_orbys',
 })
 

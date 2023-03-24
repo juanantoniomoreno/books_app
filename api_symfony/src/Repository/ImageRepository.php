@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Book;
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,8 +12,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Image|null find($id, $lockMode = null, $lockVersion = null)
  * @method Image|null findOneBy(array $criteria, array $orderBy = null)
- * @method Image[]    findAll()
  * @method Image[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Image[]    findAll()
  */
 class ImageRepository extends ServiceEntityRepository
 {
@@ -37,6 +38,22 @@ class ImageRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @return Image[]
+     */
+    public function findAllByBook(Book $book):array
+    {
+        $query = $this -> getEntityManager() -> createQuery(
+            "SELECT image
+            FROM App\Entity\Image image
+            WHERE image.book = :book
+            AND image.image_is_deleted = 0"
+        )->setParameter('book', $book);
+
+        $images = $query -> getResult();
+        return $images;
     }
 
 //    /**

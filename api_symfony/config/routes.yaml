@@ -3,35 +3,3 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
-
-books_save:
-    path: /books/saveBook
-    methods: GET
-    controller: App\Controller\BookController::saveBook
-
-books_getOneBook:
-    path: /books/getOneBook/{book_id}
-    methods: GET
-    controller: App\Controller\BookController::getOneBook
-
-books_getAllBooks:
-    path: /books/allbooks
-    methods: GET
-    controller: App\Controller\BookController::getAllBooks
-
-books_dramaBooks:
-    path: /books/getDramaBooks
-    methods: GET
-    controller: App\Controller\BookController::getDramaBooks
-
-books_updateBook:
-    path: /books/updateBook/{book_id}
-    methods: GET
-    controller: App\Controller\BookController::updateBook
-
-books_deleteBook:
-    path: /books/deleteBook/{book_id}
-    methods: GET
-    controller: App\Controller\BookController::logicalDeleteBook
-
-

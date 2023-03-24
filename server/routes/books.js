@@ -27,7 +27,7 @@ router.get("/getBookImages/:book_id", bookController.getBookImages);
 //-------------------------------------------------------
 //5. Create a new Book
 //localhost:4000/books/createBook
-router.post("/createBook",  multer("book"),  bookController.createBook);
+router.post("/createBook", multer("book"), bookController.createBook);
 
 //-------------------------------------------------------
 //6. Logical deletion of a book
